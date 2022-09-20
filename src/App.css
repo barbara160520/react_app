@@ -4,11 +4,55 @@ h1 {
 }
 
 .message{
-  width: 100%;
-  text-align: center;
+  text-align: left;
   border: 1px solid;
   margin: 10px;
   padding:15px;
   color: #00529B;
   background-color: #BDE5F8;
+}
+
+form{
+  height: 130px;
+  background-color: #BDE5F8;
+  border: 1px solid #00529B;
+  width: auto;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+label{
+  color: #00529B;
+  margin-left: 10px;
+}
+
+button{
+  height: 25px;
+  border: 1px solid #00529B;
+  border-radius: 5px;
+  background-color: #00529B;
+  color: #FFFFFF;
+  margin-right: 10px;
+}
+button:hover, button:focus{
+  border: 1px solid #00529B;
+  background-color: #FFFFFF;
+  color: #00529B;
+  cursor: pointer;
+}
+
+input{
+  width: 45%;
+  height: 25px;
+  margin: 10px 10px 10px 0px;
+  border: 1px solid #00529B;
+  border-radius: 5px;
+  padding-left: 10px;
+  outline:none;
+}
+input:focus{
+  background-color: #00529B;
+  color: #FFFFFF;
 }
