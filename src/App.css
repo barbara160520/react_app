@@ -1,6 +1,15 @@
 h1 {
-  color: #27aedb;
+  color: #FFFFFF;
   text-align: center;
+}
+
+#chat-window {
+  height: 20rem;
+}
+
+#chat-window-messages {
+  height: 18rem;
+  overflow: auto;
 }
 
 .message{
@@ -24,35 +33,15 @@ form{
   align-content: center;
 }
 label{
+  height: 25px;
   color: #00529B;
   margin-left: 10px;
 }
-
-button{
-  height: 25px;
-  border: 1px solid #00529B;
-  border-radius: 5px;
-  background-color: #00529B;
-  color: #FFFFFF;
-  margin-right: 10px;
-}
-button:hover, button:focus{
-  border: 1px solid #00529B;
-  background-color: #FFFFFF;
-  color: #00529B;
-  cursor: pointer;
-}
-
 input{
-  width: 45%;
-  height: 25px;
-  margin: 10px 10px 10px 0px;
   border: 1px solid #00529B;
   border-radius: 5px;
-  padding-left: 10px;
   outline:none;
 }
-input:focus{
-  background-color: #00529B;
-  color: #FFFFFF;
+#bnt{
+  height: 55px;
 }

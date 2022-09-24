@@ -1,33 +1,38 @@
 import './App.css';
-import React, { useState } from "react";
-import Message from './Message';
+import * as React from 'react';
+import {Fragment} from 'react';
+import Bar from './components/Bar';
+import Message from './components/Message';
+
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#00529B',
+    },
+    secondary: {
+      main: '#BDE5F8',
+    },
+    error: {
+      main: '#b71c1c',
+    },
+    warning: {
+      main: '#ffab40',
+    },
+  },
+});
 
 function App() {
-  const [messageList, setMessageList] = useState([]);
-  const [author, setName] = useState('');
-  const [text, setText] = useState('');
-
-  const handelSubmit = (e) => {
-    e.preventDefault();
-   
-    setMessageList( prevState => [...prevState,{
-      text: text,
-      author: author
-    }])
-  }
 
   return (
-    <div>
-        <h1>Добро пожаловать</h1>
-          <form onSubmit={handelSubmit}>
-            <label>Ваше имя: </label>
-            <input value={author} onChange={(event)=>setName(event.target.value)}/>
-            <label>Ваше сообщение: </label>
-            <input  value={text} onChange={(event)=>setText(event.target.value)}/>
-            <button type='submit'>Отправить</button>
-          </form>
-          <Message messageList={messageList} setMessageList={setMessageList}/>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Fragment>
+        <Bar/>
+        <Message/>
+      </Fragment>
+    </ThemeProvider>
   );
 }
 
