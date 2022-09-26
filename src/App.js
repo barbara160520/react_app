@@ -1,9 +1,12 @@
 import './App.css';
 import * as React from 'react';
-import {Fragment} from 'react';
-import Bar from './components/Bar';
-import Message from './components/Message';
-
+import Layout from './components/Layout';
+import Main from './pages/Main';
+import User from './pages/User';
+import Blog from './pages/Blog';
+import About from './pages/About';
+import NotFound from "./pages/NorFound";
+import {Route, Routes} from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -25,13 +28,17 @@ const theme = createTheme({
 });
 
 function App() {
-
   return (
     <ThemeProvider theme={theme}>
-      <Fragment>
-        <Bar/>
-        <Message/>
-      </Fragment>
+        <Routes>
+          <Route path={'/'} element={<Layout/>}>
+            <Route index element={<Main/>}/>
+            <Route path={'/user'} element={<User/>}/>
+            <Route path={'/blog'} element={<Blog/>}/>
+            <Route path={'/about'} element={<About/>}/>
+          </Route>
+          <Route path={'*'} element={<NotFound/>}/>
+        </Routes>
     </ThemeProvider>
   );
 }
