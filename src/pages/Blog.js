@@ -1,11 +1,11 @@
 import React from 'react';
 import {Container} from "@mui/material";
-import Message from '../components/Message.jsx';
+import Chats from '../components/Chats.jsx';
 
 const Blog = () => {
     return (
         <Container>
-            <Message/>
+            <Chats/>
         </Container>
     );
 };

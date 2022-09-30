@@ -32,6 +32,12 @@ form{
   align-items: center;
   align-content: center;
 }
+.chatName{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
 label{
   height: 25px;
   color: #00529B;

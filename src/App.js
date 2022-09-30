@@ -8,6 +8,8 @@ import About from './pages/About';
 import NotFound from "./pages/NorFound";
 import {Route, Routes} from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Chats from './components/Chats';
+import Message from './components/Message';
 
 const theme = createTheme({
   palette: {
@@ -36,6 +38,8 @@ function App() {
             <Route path={'/user'} element={<User/>}/>
             <Route path={'/blog'} element={<Blog/>}/>
             <Route path={'/about'} element={<About/>}/>
+            <Route path={'/chats'} element={<Chats/>}/>
+            <Route path={'/message/:id'} element={<Message/>}/>
           </Route>
           <Route path={'*'} element={<NotFound/>}/>
         </Routes>

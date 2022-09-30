@@ -1,37 +1,12 @@
 import '../App.css';
-import { AppBar, Toolbar, Typography,Container } from "@mui/material";
+import { AppBar, Toolbar, Typography,Container, Button,Switch } from "@mui/material";
 import { Box } from "@mui/system";
-import { Fragment } from "react";
+import { Fragment, useState,useContext } from "react";
 import PublicIcon from '@mui/icons-material/Public';
 import {Outlet} from "react-router-dom";
 import CustomLink from "./CustomLink";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-const theme = createTheme({
-    palette: {
-      type: 'light',
-      primary: {
-        main: '#00529B',
-      },
-      secondary: {
-        main: '#BDE5F8',
-      },
-      error: {
-        main: '#b71c1c',
-      },
-      warning: {
-        main: '#ffab40',
-      },
-    },
-    text:{
-        primary:{
-            main: '#FFFFFF',
-        },
-        secondary: {
-            main: '#F2F2F2',
-        },
-    },
-  });
+import { ThemeContext,themes } from '../context';
 
 function Copyright() {
     return (
@@ -46,13 +21,18 @@ function Copyright() {
   }
 
 function Bar() {
-
+    const [constTheme, setConstTheme] = useState(themes.light);
+    
+    const toggleTheme = () => {
+      setConstTheme(prevState => prevState === themes.light ? themes.dark : themes.light);
+    }
+    const theme = useContext(ThemeContext);
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeContext.Provider value={{themes: constTheme, toggleTheme:toggleTheme}}>
         <Fragment>
-            <Box mb={4}>
+            <Box  mb={4}>
                 <AppBar position="static">
-                    <Toolbar>
+                    <Toolbar sx={{bgcolor: constTheme.background}}>
                         <Box mr={2}>
                             <PublicIcon fontSize={'large'}/>
                         </Box>
@@ -62,6 +42,10 @@ function Bar() {
                             <CustomLink  to={'/user'} >Profile</CustomLink>
                             <CustomLink  to={'/blog'} >Blog</CustomLink>
                             <CustomLink  to={'/about'} >About</CustomLink>
+                            <Box>
+                              <Button sx={{color: constTheme.switch}} onClick={toggleTheme}>Light</Button>
+                              <Button sx={{color: constTheme.switch}} onClick={toggleTheme}>Dark</Button>
+                            </Box>
                         </Box>
                     </Toolbar>
                 </AppBar>
@@ -81,7 +65,7 @@ function Bar() {
                 py: 2,
                 px: 2,
                 mt: 'auto',
-                backgroundColor: theme.palette.primary.main,
+                backgroundColor: constTheme.background,
                 }}
             >
                 <Container >
@@ -92,7 +76,7 @@ function Bar() {
                 </Container>
             </Box>
         </Fragment>
-        </ThemeProvider>
+        </ThemeContext.Provider>
     )
 }
 

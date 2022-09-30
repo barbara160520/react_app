@@ -3,10 +3,47 @@ import * as React from 'react';
 import {useState,useEffect,useRef} from 'react';
 import {Container,Button,Grid,List,ListItem,Divider,FormControl,ListItemText, Paper, TextField,Typography, Box} from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
+import AddIcon from '@mui/icons-material/Add';
 import Chats from "./Chats"
+import { Link, useParams } from 'react-router-dom';
+import ChatList from './ChatList';
 
 function Message(){
-    const [messageList, setMessageList] = useState([]);
+    const [messageList, setMessageList] = useState([
+        {
+            id:1,
+            text:"I'll be in your neighborhood doing errands this morning",
+            author:"Ali",
+            chat_id: 1
+        },
+        {
+            id:2,
+            text:"Ok",
+            author:"Scott",
+            chat_id: 1
+        },
+        {
+            id:3,
+            text:"Do you have my recommendations? ",
+            author:"Alex",
+            chat_id: 2
+        },        {
+            id:4,
+            text:"Yes",
+            author:"Jennifer",
+            chat_id: 2
+        },        {
+            id:5,
+            text:"Wish I could come, but I'm out of town this.",
+            author:"Sandra",
+            chat_id: 3
+        },        {
+            id:6,
+            text:"Clear",
+            author:"Adam",
+            chat_id: 3
+        }
+    ]);
     const [author, setName] = useState('');
     const [text, setText] = useState('');
     const ref = useRef(null);
@@ -14,11 +51,11 @@ function Message(){
     const handelSubmit = (e) => {
       e.preventDefault();
      
-      setMessageList( prevState => [...prevState,{
+/*      setMessageList( prevState => [...prevState,{
         id: getLastId(prevState),
         text: text,
         author: author
-      }])
+      }])*/
       setName('')
       setText('')
     }
@@ -28,9 +65,9 @@ function Message(){
     }
  
     useEffect(() => {
-        setTimeout(() => {
+        /*setTimeout(() => {
             robot()
-        },2000)
+        },2000)*/
     },[messageList])
 
   
@@ -45,7 +82,15 @@ function Message(){
       }
     }
   
-    const chatMessageList = messageList.map(message => {
+    const {id} = useParams();
+
+    const messages = messageList.filter((message) => {
+        if(!id) return true
+
+        return message.chat_id === Number(id)
+    })
+
+    const chatMessageList = messages.map(message => {
         return(
             <ListItem key={message.id}>
                 <ListItemText primary={`${message.author}: ${message.text}`}/>
@@ -53,27 +98,23 @@ function Message(){
         )
     })
 
-
     return (
         <Container >
             <Paper elevation={5}>
                 <Box  p={3}>
+                
                 <Typography ref={ref} onMouseOver={()=> ref.current.style.color = '#00529B'}
                  onMouseOut={()=> ref.current.style.color = 'black'} variant='h5' gutterBottom>
-                    Ваша переписка:
+                    <Link  to={'/blog'}>Назад</Link>
                 </Typography>
+                
                 <Divider/>
                 <Grid container sx={{ height: '70vh' }} spacing={2} alignItems="center">
-                    <Grid id="list-window" xs={6} item>
-                        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', borderRight: 1, borderColor: "grey.300" }}>
-                            <Chats/>
-                        </List>
-                        
-                    </Grid>
-                    <Grid id="chat-window" xs={6} item>
+                    <Grid id="chat-window" xs={12} item>
                         <List id="chat-window-messages">
                             {chatMessageList}
                         </List>
+                        
                     </Grid>
                     <Grid xs={3} item>
                         <FormControl fullWidth>
