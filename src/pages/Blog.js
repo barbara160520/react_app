@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container} from "@mui/material";
-import Chats from '../components/Chats.jsx';
+import Chats from '../components/Chats';
 
 const Blog = () => {
     return (

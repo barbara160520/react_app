@@ -1,11 +1,10 @@
 import '../App.css';
-import { AppBar, Toolbar, Typography,Container, Button,Switch } from "@mui/material";
+import { AppBar, Toolbar, Typography,Container, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Fragment, useState,useContext } from "react";
 import PublicIcon from '@mui/icons-material/Public';
 import {Outlet} from "react-router-dom";
 import CustomLink from "./CustomLink";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { ThemeContext,themes } from '../context';
 
 function Copyright() {
@@ -20,7 +19,8 @@ function Copyright() {
     );
   }
 
-function Bar() {
+function Layout() {
+
     const [constTheme, setConstTheme] = useState(themes.light);
     
     const toggleTheme = () => {
@@ -80,4 +80,4 @@ function Bar() {
     )
 }
 
-export default Bar;
+export default Layout;

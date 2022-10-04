@@ -1,23 +1,26 @@
 import React from 'react';
 import {Fragment} from 'react';
-import {Button,ListItem,ListItemAvatar,FormControl,Avatar,ListItemText, Paper, TextField,Typography, Box} from "@mui/material";
+import {Button,ListItem,ListItemAvatar,Avatar,ListItemText, Typography} from "@mui/material";
 import { Link } from 'react-router-dom';
 import ClearIcon from '@mui/icons-material/Clear';
-import AddIcon from '@mui/icons-material/Add';
+import { useDispatch, useSelector } from 'react-redux';
+import { chatSelector } from '../redux/reducers/chatsReducer/chatSelector';
 
 
-function ChatList({arrayChats,setArrayChats}){
+function ChatList(){
 
-    const handelDelete = (id) => {
-        const filtered = arrayChats.filter((chat) => chat.id !== id)
-        setArrayChats(filtered);
+    const chats = useSelector(chatSelector);
+    const dispatch = useDispatch();
+    
+    const handleDelete = (id) => {
+        dispatch({ type: 'delete', payload: id})
     }
 
     return (
-        arrayChats.map( chat => {
+        chats.map( (chat) => {
             return(
                 <ListItem sx={{borderBottom: 1, borderColor: "grey.300"}} >
-                    <Button onClick={() => handelDelete(chat.id)}><ClearIcon/></Button>
+                    <Button onClick={() => handleDelete(chat.id)}><ClearIcon/></Button>
                     
                         <ListItemAvatar>
                             <Avatar alt="Remy Sharp" src={chat.img} />
