@@ -1,12 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "../App.css";
-import {Container,Button,Stack, Typography, Box} from "@mui/material";
+import {Container,Typography, Box,Grid,Card,CardMedia,CardContent} from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ThemeContext } from '../context';
+import Photo from './Photo';
 
 function Home() {
   const {themes,toggleTheme} = useContext(ThemeContext);
+  const [data,setData] = useState([]);
+
+  useEffect(()=>{
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((resp)=>resp.json())
+      .then((data) => setData(data))
+      .catch((error)=> console.log(error))
     
+  },[])
+
     return (
         
           <Box
@@ -16,7 +26,7 @@ function Home() {
               pb: 6,
             }}
           >
-            <Container maxWidth="sm">
+            <Container >
               <Typography
                 component="h1"
                 variant="h2"
@@ -31,14 +41,12 @@ function Home() {
                 the creator, etc. Make it short and sweet, but not too short so folks
                 don&apos;t simply skip over it entirely.
               </Typography>
-              <Stack
-                sx={{ pt: 4 }}
-                direction="row"
-                spacing={2}
-                justifyContent="center"
-              >
-                <Button sx={{color: themes.switch}} variant="text">Next</Button>
-              </Stack>
+              <Box sx={{ py: 5 }}  >
+                <Grid container spacing={4}>
+                    <Photo photos={data}/>
+                </Grid>
+              </Box>
+             
             </Container>
           </Box>
           

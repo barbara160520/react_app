@@ -1,19 +1,23 @@
 import '../App.css';
 import * as React from 'react';
 import {useState,useEffect,useRef} from 'react';
-import {Container,Button,Grid,List,ListItem,Divider,FormControl,ListItemText, Paper, TextField,Typography, Box} from "@mui/material";
+import {Container,Button,Grid,List,Divider,FormControl,Paper, TextField,Typography, Box} from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { Link, useParams } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import { messageSelector } from '../redux/reducers/messageReducer/messageSelector';
+import MessageList from './MessageList';
 
 function Message(){
     const [author, setName] = useState('');
     const [text, setText] = useState('');
     const ref = useRef(null);
     const {id} = useParams();
-
+    const messageList = useSelector(messageSelector);
     const dispatch = useDispatch();  
+
+
+    
     const handelAdd = (e) => {
         e.preventDefault();
         const obj = {
@@ -26,47 +30,37 @@ function Message(){
             type: 'add',
             payload: obj
         })
+        robot()
     }
 
     function getLastId(array){
       return array.length ? array[array.length - 1].id + 1 : 0
     }
- 
-    useEffect(() => {
-        /*setTimeout(() => {
-            robot()
-        },2000)*/
-    },[])
-
   
- /*   function robot(){
-      const user = messageList[messageList.length - 1];
+    function robot(){
+      const user = messageList[messageList.length-1];
       if(user && user.author !== "Админ"){
         const obj = {
-            id: getLastId(messageList),
+            id: getLastId(messageList)+1,
             author: 'Админ',
-            text: `Привет ${user.author}!`
+            text: `Привет ${user.author}!`,
+            chat_id: Number(id),
         }
         dispatch({
-            type: 'add',
-            payload: obj
+            type: 'robot',
+            payload: obj,
+            meta:{
+                delyMs: 2000
+            }
         })
       }
-    }*/
+    }
   
-    const messageList = useSelector(messageSelector);
+    
     
     const messages = messageList.filter((message) => {
         if(!id) return true
         return message.chat_id === Number(id)
-    })
-    
-    const chatMessageList = messages.map(message => {
-        return(
-            <ListItem key={message.id}>
-                <ListItemText primary={`${message.author}: ${message.text}`}/>
-            </ListItem>
-        )
     })
 
     return (
@@ -83,7 +77,7 @@ function Message(){
                 <Grid container sx={{ height: '70vh' }} spacing={2} alignItems="center">
                     <Grid id="chat-window" xs={12} item>
                         <List id="chat-window-messages">
-                            {chatMessageList}
+                            <MessageList messages={messages}/>
                         </List>
                         
                     </Grid>

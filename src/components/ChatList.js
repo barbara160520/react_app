@@ -13,15 +13,22 @@ function ChatList(){
     const dispatch = useDispatch();
     
     const handleDelete = (id) => {
-        dispatch({ type: 'delete', payload: id})
+        dispatch({ 
+            type: 'delete', 
+            payload: {
+                id:id
+            },
+            meta:{
+                delyMs: 3000
+            }
+        })
     }
 
     return (
         chats.map( (chat) => {
             return(
-                <ListItem sx={{borderBottom: 1, borderColor: "grey.300"}} >
+                <ListItem sx={{borderBottom: 1, borderColor: "grey.300"}} key={chat.id}>
                     <Button onClick={() => handleDelete(chat.id)}><ClearIcon/></Button>
-                    
                         <ListItemAvatar>
                             <Avatar alt="Remy Sharp" src={chat.img} />
                         </ListItemAvatar>

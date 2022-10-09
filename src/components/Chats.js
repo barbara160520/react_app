@@ -51,8 +51,7 @@ function Chats () {
                     <Grid id="list-window" xs={12} item>
                         <List sx={{ p: 0, m: 0, width: '100%',  bgcolor: 'background.paper',borderLeft: 1, borderRight: 1, borderColor: "grey.300" }}>
                             <ChatList />
-                        </List>
-                        
+                        </List>  
                     </Grid>
                 </Grid>
                 </Box>

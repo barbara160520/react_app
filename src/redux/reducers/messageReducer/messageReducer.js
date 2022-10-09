@@ -52,6 +52,14 @@ export const messageReducer = (state = initialState, action) => {
                     action.payload
                 ]
             }
+        case "robot":
+            return{
+                ...state,
+                messages:[
+                    ...state.messages,
+                    action.payload
+                ]
+            }
       default:
         return state
     }
