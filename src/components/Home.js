@@ -1,21 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext} from 'react';
 import "../App.css";
-import {Container,Typography, Box,Grid,Card,CardMedia,CardContent} from "@mui/material";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {Container,Typography, Box,Grid} from "@mui/material";
 import { ThemeContext } from '../context';
 import Photo from './Photo';
 
 function Home() {
   const {themes,toggleTheme} = useContext(ThemeContext);
-  const [data,setData] = useState([]);
-
-  useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((resp)=>resp.json())
-      .then((data) => setData(data))
-      .catch((error)=> console.log(error))
-    
-  },[])
 
     return (
         
@@ -43,10 +33,9 @@ function Home() {
               </Typography>
               <Box sx={{ py: 5 }}  >
                 <Grid container spacing={4}>
-                    <Photo photos={data}/>
+                    <Photo />
                 </Grid>
               </Box>
-             
             </Container>
           </Box>
           

@@ -5,7 +5,7 @@ import {Container,Button,Grid,List,Divider,FormControl,Paper, TextField,Typograp
 import SendIcon from '@mui/icons-material/Send';
 import { Link, useParams } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
-import { messageSelector } from '../redux/reducers/messageReducer/messageSelector';
+import { messageSelector } from '../redux/reducers/messagesReducer/messageSelector';
 import MessageList from './MessageList';
 
 function Message(){

@@ -1,7 +1,36 @@
-import React from 'react';
-import {Container,Button,Stack, Typography, Box,Grid,Card,CardMedia,CardContent} from "@mui/material";
+import React,{useEffect} from 'react';
+import {Container,Button,Stack, Typography, Box,Grid,Card,CardMedia,CardContent,Skeleton} from "@mui/material";
+import { useSelector,useDispatch } from 'react-redux';
+import { photoSelector,errorSelector,loadSelector } from '../redux/reducers/photosReducer/photoSelector'
+import NotFound from "../pages/NorFound";
+import { getData } from "../redux/reducers/photosReducer/photoReducer";
 
-const Photo = ({photos}) => {
+function Photo() {
+  const photos = useSelector(photoSelector);
+  const loading = useSelector(loadSelector);
+  const error = useSelector(errorSelector);
+  const dispatch = useDispatch();
+  
+  useEffect(()=>{
+    dispatch(getData())
+  },[])
+
+  if(loading){
+    return(
+      <Box sx={{ width: 300 }}>
+        <Skeleton />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </Box>
+    )
+  }
+
+  if(error){
+    return(
+      <NotFound/>
+    )
+  }
+
   return (
     photos.map((photo)=>{
       return(
@@ -31,6 +60,6 @@ const Photo = ({photos}) => {
         </Grid>
       )})
   );
-};
+}
 
 export default Photo;
