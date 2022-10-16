@@ -3,9 +3,13 @@ import { AppBar, Toolbar, Typography,Container, Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { Fragment, useState,useContext } from "react";
 import PublicIcon from '@mui/icons-material/Public';
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import CustomLink from "./CustomLink";
 import { ThemeContext,themes } from '../context';
+import { useDispatch, useSelector } from 'react-redux';
+import {userSelector} from '../redux/reducers/usersReducer/userSelector.js'
+import { logoutInitial } from '../redux/reducers/usersReducer/userReducer';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 function Copyright() {
     return (
@@ -22,6 +26,20 @@ function Copyright() {
 function Layout() {
 
     const [constTheme, setConstTheme] = useState(themes.light);
+    const dispatch = useDispatch();
+    const user = useSelector(userSelector);
+    const navigate = useNavigate('');
+
+
+    const handelAuth = () => {
+        if(user){
+            dispatch(logoutInitial())
+        }
+        setTimeout(()=>{
+            navigate('/login')
+        },2000)
+    }
+
     
     const toggleTheme = () => {
       setConstTheme(prevState => prevState === themes.light ? themes.dark : themes.light);
@@ -46,6 +64,7 @@ function Layout() {
                               <Button sx={{color: constTheme.switch}} onClick={toggleTheme}>Light</Button>
                               <Button sx={{color: constTheme.switch}} onClick={toggleTheme}>Dark</Button>
                             </Box>
+                            <Button  sx={{color: constTheme.switch}} onClick={handelAuth}><LogoutIcon/></Button>
                         </Box>
                     </Toolbar>
                 </AppBar>

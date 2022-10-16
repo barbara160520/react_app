@@ -5,6 +5,7 @@ import { photoReducer } from "../reducers/photosReducer/photoReducer";
 import storage from 'redux-persist/lib/storage';
 import {persistReducer,persistStore} from "redux-persist";
 import thunk from "redux-thunk";
+import { userReducer } from "../reducers/usersReducer/userReducer";
 
 /*const logger = store => next => action =>{
     console.log('dispatching',action);
@@ -37,7 +38,8 @@ const timeout = store => next => action =>{
 export const reducer = combineReducers({
     messages: messageReducer,
     chats: chatReducer,
-    photos: photoReducer
+    photos: photoReducer,
+    users: userReducer
 })
 
 //const persistedReducer = persistReducer(config, reducer)

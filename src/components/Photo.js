@@ -15,6 +15,10 @@ function Photo() {
     dispatch(getData())
   },[])
 
+  const fetchUsers = () => {
+    dispatch(getData())
+  }
+
   if(loading){
     return(
       <Box sx={{ width: 300 }}>
@@ -27,12 +31,15 @@ function Photo() {
 
   if(error){
     return(
-      <NotFound/>
+      <div>
+        Error
+        <button onClick={fetchUsers}>back</button>
+      </div>
     )
   }
 
   return (
-    photos.map((photo)=>{
+ /*   photos.map((photo)=>{
       return(
           <Grid item key={photo.id} xs={12} sm={6} md={4}>
           <Card
@@ -58,7 +65,8 @@ function Photo() {
             </CardContent>
           </Card>
         </Grid>
-      )})
+      )})*/
+      <div></div>
   );
 }
 

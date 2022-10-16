@@ -5,6 +5,8 @@ import Main from './pages/Main';
 import User from './pages/User';
 import Blog from './pages/Blog';
 import About from './pages/About';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import NotFound from "./pages/NorFound";
 import {Route, Routes} from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -40,6 +42,8 @@ function App() {
             <Route path={'/about'} element={<About/>}/>
             <Route path={'/chats'} element={<Chats/>}/>
             <Route path={'/message/:id'} element={<Message/>}/>
+            <Route path={'/login'} element={<Login/>}/>
+            <Route path={'/register'} element={<Register/>}/>
           </Route>
           <Route path={'*'} element={<NotFound/>}/>
         </Routes>

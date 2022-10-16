@@ -1,25 +1,25 @@
-import { GET_PHOTOS, GET_PHOTOS_LOADING,GET_PHOTOS_ERROR } from "../../storge/actionTypes"
+import { errorPhotos,loadingPhotos } from "../../storge/actions";
 
 const initialState = {
     photos: [],
     loading: false,
-    error: ''
+    error: null
   }
   
 export const photoReducer = (state = initialState, action) => {
     switch(action.type){
-        case GET_PHOTOS_LOADING:
+        case 'loading':
             return{
                 ...state,
                 loading: true
             }
-        case GET_PHOTOS_ERROR:
+        case 'error':
             return{
                 ...state,
                 error: action.payload,
                 loading: false
             }
-        case GET_PHOTOS:
+        case 'getPhotos':
             return {
                 ...state,
                 photos: action.payload
@@ -31,21 +31,23 @@ export const photoReducer = (state = initialState, action) => {
 
 export const getData = () => {
     return async (dispatch) => {
-        dispatch({
-            type: GET_PHOTOS_LOADING
-        })
+        dispatch(
+            loadingPhotos()
+           // type: 'loading'
+        )
         try{
             const response = await fetch('https://jsonplaceholder.typicode.com/users');
             const data = await response.json();
             dispatch({
-                type: GET_PHOTOS,
+                type: 'getPhotos',
                 payload: data
             })
-        }catch(error){
-            dispatch({
-                type: GET_PHOTOS_ERROR,
-                payload: error.toString()
-            })
+        }catch(e){
+            dispatch(
+                errorPhotos(e.toString())
+                /*type: 'error',
+                payload: e.toString()*/
+            )
         }finally{
             console.log("work it")
         }
