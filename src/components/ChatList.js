@@ -14,7 +14,7 @@ function ChatList(){
     
     const handleDelete = (id) => {
         dispatch({ 
-            type: 'delete', 
+            type: 'deleteChat', 
             payload: {
                 id:id
             },

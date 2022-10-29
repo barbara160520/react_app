@@ -12,6 +12,8 @@ import {Route, Routes} from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Chats from './components/Chats';
 import Message from './components/Message';
+import ProtectedRoutes from './components/ProtectedRoutes';
+import AddContact from './pages/AddContact';
 
 const theme = createTheme({
   palette: {
@@ -38,11 +40,12 @@ function App() {
           <Route path={'/'} element={<Layout/>}>
             <Route index element={<Main/>}/>
             <Route path={'/user'} element={<User/>}/>
-            <Route path={'/blog'} element={<Blog/>}/>
+            <Route path={'/blog'} element={<ProtectedRoutes><Blog/></ProtectedRoutes>}/>
             <Route path={'/about'} element={<About/>}/>
             <Route path={'/chats'} element={<Chats/>}/>
             <Route path={'/message/:id'} element={<Message/>}/>
             <Route path={'/login'} element={<Login/>}/>
+            <Route path={'/addcontact'} element={<AddContact/>}/>
             <Route path={'/register'} element={<Register/>}/>
           </Route>
           <Route path={'*'} element={<NotFound/>}/>

@@ -39,12 +39,12 @@ const initialState = {
   
 export const messageReducer = (state = initialState, action) => {
     switch(action.type){
-        case "delete":
+        case "deleteMessage":
             return {
                 ...state,
                 messages: state.messages.filter((item)=>item.id !== action.payload)
             }
-        case "add":
+        case "addMessage":
             return {
                 ...state,
                 messages: [

@@ -17,7 +17,7 @@ function Chats () {
             name: nameChat,
         }
         dispatch({
-            type: 'add',
+            type: 'addChat',
             payload: obj
         })
 
@@ -34,7 +34,7 @@ function Chats () {
                             Ваша переписка 
                         </Typography>
                         </Grid>
-                        <Grid xs={6} item class="chatName">
+                        <Grid xs={6} item className="chatName">
                             <FormControl sx={{m: 1}} >
                                 <TextField 
                                     onChange={(event)=> setName(event.target.value)}

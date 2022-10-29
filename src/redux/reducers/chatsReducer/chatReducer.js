@@ -1,7 +1,6 @@
-import foto_1 from '/home/barbymak/React_GB/react_app/src/images/1.jpg';
-import foto_2 from '/home/barbymak/React_GB/react_app/src/images/2.jpg';
-import foto_3 from '/home/barbymak/React_GB/react_app/src/images/3.jpg';
-
+import foto_1 from '../../../images/1.jpg';
+import foto_2 from '../../../images/2.jpg';
+import foto_3 from '../../../images/3.jpg';
 
 const initialState = {
     chats: [
@@ -29,13 +28,12 @@ const initialState = {
 
 export const chatReducer = (state = initialState, action) => {
     switch (action.type) {
-
-        case 'delete':
+        case 'deleteChat':
             return {
                 ...state,
                 chats: state.chats.filter((item) => item.id !== action.payload.id)
             }
-        case "add":
+        case "addChat":
             return {
                 ...state,
                 chats: [

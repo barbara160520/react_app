@@ -27,7 +27,7 @@ function Message(){
             chat_id: Number(id),
         }
         dispatch({
-            type: 'add',
+            type: 'addMessage',
             payload: obj
         })
         robot()
@@ -55,8 +55,7 @@ function Message(){
         })
       }
     }
-  
-    
+     
     
     const messages = messageList.filter((message) => {
         if(!id) return true

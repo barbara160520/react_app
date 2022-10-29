@@ -1,6 +1,8 @@
 import React, { useContext} from 'react';
 import "../App.css";
 import {Container,Typography, Box,Grid} from "@mui/material";
+import { userSelector } from '../redux/reducers/usersReducer/userSelector';
+import { useSelector } from 'react-redux';
 import { ThemeContext } from '../context';
 import Photo from './Photo';
 

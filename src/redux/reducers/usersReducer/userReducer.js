@@ -18,7 +18,7 @@ export const userReducer = (state = initialState,action) =>{
                 ...state,
                 loading: true
             }
-        case types.LOGOUT_ERROR:
+        case types.ERROR_LOGOUT:
         case types.ERROR_LOGIN:
         case types.ERROR_REGISTER:
             return{
@@ -26,7 +26,6 @@ export const userReducer = (state = initialState,action) =>{
                 error: action.payload,
                 loading: false
             }
-        
         case types.SUCCESS_LOGIN:
         case types.SUCCESS_REGISTER:
             return {
@@ -36,7 +35,8 @@ export const userReducer = (state = initialState,action) =>{
         case types.LOGOUT_SUCCESS:
             return{
                 ...state,
-                currentUser: state.currentUser = null
+                currentUser: state.currentUser = null,
+                loading: false
             }
         default:
             return state

@@ -41,7 +41,7 @@ export const logoutStart = () => ({
 })
 
 export const logoutError = (e) => ({
-    type: types.LOGOUT_ERROR,
+    type: types.ERROR_LOGOUT,
     payload: e.toString()
 })
 

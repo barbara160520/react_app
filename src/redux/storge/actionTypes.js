@@ -12,4 +12,4 @@ export const ERROR_LOGIN = 'ERROR_LOGIN';
 
 export const LOGOUT_START = 'LOGOUT_START';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_ERROR = 'LOGOUT_ERROR';
+export const ERROR_LOGOUT = 'ERROR_LOGOUT';

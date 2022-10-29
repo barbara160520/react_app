@@ -14,6 +14,7 @@ const Login = () => {
 
     const handelSubmit = (e) => {
         e.preventDefault();
+        console.log(email,password)
         if(!email || !password){
             return;
         }
@@ -60,9 +61,7 @@ const Login = () => {
                         </Grid>
                         <Grid item >
                             <Button variant="contained" onClick={handelSubmit} type='submit'>Войти</Button>
-                            <Button >
-                                <NavLink  to={'/register'}>Регистрация</NavLink>
-                            </Button>
+                            <Button variant="contained" style={{background:"#00529B", marginLeft:"15px"}} ><NavLink style={{color:"#FFFFFF"}} to={'/register'}>Регистрация</NavLink></Button>
                         </Grid>
                     </Grid>
                 </Box>

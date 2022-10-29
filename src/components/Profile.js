@@ -1,12 +1,14 @@
 import '../App.css';
-import * as React from 'react';
-import {Avatar,Paper,Box,Grid,Typography} from "@mui/material";
+import React, { useState,useEffect } from 'react';
+import {Link,Paper,Box,Grid,Typography,Table,TableBody,TableCell,TableContainer,TableHead,TableRow, Button } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { Container } from '@mui/system';
+import {db} from '../servise/firebase'
+import {NavLink} from "react-router-dom";
 
 function Profile() {
   const theme = createTheme({
@@ -27,53 +29,56 @@ function Profile() {
     },
   });
 
+  const [data,setData] = useState({});
+  useEffect(() => {
+    db.child('contacts').on("value", (snap) => {
+      if(snap.val() !== null){
+        setData({...snap.val()})
+      }else{
+        setData({})
+      }
+    })
+
+    return ()=>{
+      setData({})
+    }
+
+  },[])
+
+
+
+
   return (
     <ThemeProvider theme={theme}>
     <Container>
+    <Button style={{background:"#00529B", marginBottom:"15px"}} ><NavLink style={{color:"#BDE5F8"}} to={'/addcontact'}>Добавить пользователя</NavLink></Button>
     <Grid container  sx={{ height: '80vh' }}>
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage: 'url(https://source.unsplash.com/random)',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: (t) =>
-            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-        <Box
-          sx={{
-            my: 8,
-            mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ width: 56, height: 56, m: 1, bgcolor: 'secondary.main' }}>
-            <AccountCircleIcon fontSize='large'/>
-          </Avatar>
-          <Typography  variant="h3">
-            Bhaumik Patel
-          </Typography>
-          <Box class="profile" >
-            <Typography >
-            <LocationOnOutlinedIcon/> San Francisco, USA 
-            </Typography>
-            <Typography >
-              <EmailOutlinedIcon/> email@example.com
-            </Typography>
-            <Typography >
-              <CalendarMonthOutlinedIcon/> June 02, 1988
-            </Typography>
-          </Box>
-        </Box>
-      </Grid>
+    
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Имя</TableCell>
+              <TableCell >Email</TableCell>
+              <TableCell >Контакты</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+          {Object.keys(data).map((id)=>{
+              return(
+                <TableRow
+                key={id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">{data[id].name}</TableCell>
+                  <TableCell >{data[id].email}</TableCell>
+                  <TableCell >{data[id].contact}</TableCell>
+                </TableRow>
+              )
+            })}
+           </TableBody>
+        </Table>
+      </TableContainer>
     </Grid>
     </Container>  
   </ThemeProvider>

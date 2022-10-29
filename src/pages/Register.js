@@ -23,17 +23,6 @@ const Register = () => {
     }
     const {themes,toggleTheme} = useContext(ThemeContext);
 
-    /*        <div>
-            <h2>Регистрация</h2>
-
-            <form onSubmit={handelSubmit}>
-                <input value={displayName} onChange={(e)=>setDisplayName(e.target.value)}/>
-                <input value={email} onChange={(e)=>setEmail(e.target.value)}/>
-                <input value={password} onChange={(e)=>setPassword(e.target.value)}/>
-                <input value={passwordConfirm} onChange={(e)=>setPasswordConfirm(e.target.value)}/>
-                <button type='submit'>Зарегистрироваться</button>
-            </form>
-        </div>*/
 
     return (
         <Container>
@@ -67,7 +56,6 @@ const Register = () => {
                                 value={email}
                                 label="Ваш Email"
                                 onChange={((e)=>setEmail(e.target.value))}
-                                autoFocus
                             />
                             <TextField
                                 value={password}
@@ -84,9 +72,7 @@ const Register = () => {
                         </Grid>
                         <Grid item >
                             <Button variant="contained" onClick={handelSubmit} type='submit'>Зарегистрироваться</Button>
-                            <Button >
-                                <NavLink  to={'/login'}>Вход</NavLink>
-                            </Button>
+                            <Button variant="contained" style={{background:"#00529B",marginLeft:"15px"}} ><NavLink style={{color:"#FFFFFF"}} to={'/login'}>Войти</NavLink></Button>
                         </Grid>
                     </Grid>
                 </Box>

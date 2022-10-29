@@ -7,7 +7,7 @@ import '../App.css';
 const NorFound = () => {
     return (
         
-        <Typography class="error_page">
+        <Typography className="error_page">
             <img src={p_404}></img>
             <Link  to={'/'} >Go Back</Link>
         </Typography>
