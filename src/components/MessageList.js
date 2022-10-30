@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {ListItem,ListItemText} from "@mui/material";
 
 function MessageList({messages}) {

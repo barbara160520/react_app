@@ -1,6 +1,10 @@
 import { auth } from '../../../servise/firebase';
 import * as types from '../../storge/actionTypes';
-import {rgisterStart,rgisterError,rgisterSuccess,loginError,loginStart,loginSuccess,logoutError,logoutStart,logoutSuccess} from '../../storge/actions';
+import {
+    rgisterStart,rgisterError,rgisterSuccess,
+    loginError,loginStart,loginSuccess,
+    logoutError,logoutStart,logoutSuccess
+} from '../../storge/actions';
 
 
 const initialState={
